@@ -1,6 +1,9 @@
 # perfume-webpack-plugin
 
+[![Build Status](https://travis-ci.com/zy308718320/perfume-webpack-plugin.svg?branch=master)](https://travis-ci.com/zy308718320/perfume-webpack-plugin)
 [![Coverage Status](https://coveralls.io/repos/github/zy308718320/perfume-webpack-plugin/badge.svg?branch=master)](https://coveralls.io/github/zy308718320/perfume-webpack-plugin?branch=master)
+![GitHub](https://img.shields.io/github/license/zy308718320/perfume-webpack-plugin)
+![GitHub package.json version](https://img.shields.io/github/package-json/v/zy308718320/perfume-webpack-plugin)
 
 A Webpack plugin to perfume.js
 
