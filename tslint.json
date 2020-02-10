@@ -7,6 +7,8 @@
   "rules": {
     "quotemark": [true, "single"],
     "member-access": [false],
+    "semicolon": [true, "never"],
+    "no-empty": [true, "allow-empty-catch", "allow-empty-functions"],
     "ordered-imports": [false],
     "max-line-length": [true, 150],
     "member-ordering": [false],
