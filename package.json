@@ -37,7 +37,6 @@
     "node": ">=10.0.0"
   },
   "dependencies": {
-    "@types/lodash": "^4.14.149",
     "acorn": "^7.1.0",
     "acorn-walk": "^7.0.0",
     "escodegen": "^1.14.1",
@@ -48,6 +47,7 @@
   "devDependencies": {
     "@types/escodegen": "0.0.6",
     "@types/estree": "0.0.42",
+    "@types/lodash": "^4.14.149",
     "@types/jest": "^25.1.1",
     "@types/webpack": "^4.41.5",
     "coveralls": "^3.0.9",
