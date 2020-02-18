@@ -1,10 +1,11 @@
 import { IPerfumeOptions } from 'perfume.js'
 import { Compiler } from 'webpack'
-import { loadFile } from './lib/utils'
+import { loadFile } from './lib/file'
 import * as acorn from 'acorn'
 import * as walk from 'acorn-walk'
 import * as escodegen from 'escodegen'
 import { pick } from 'lodash'
+import optionsFactory from './factory/options'
 
 interface IOptions extends IPerfumeOptions{
   entry: any
@@ -22,9 +23,7 @@ const DEFAULT_OPTIONS = {
   // Analytics
   reportUrl: '',
   ignoreResource: [],
-  analyticsTracker: (option: object) => {
-    console.log(option)
-  },
+  analyticsTracker: null,
   // Logging
   logPrefix: 'Perfume.js:',
   logging: true,
@@ -34,10 +33,7 @@ const DEFAULT_OPTIONS = {
 class PerfumeWebpackPlugin {
   private readonly options: {} & IOptions
 
-  private readonly hasTracker: boolean
-
-  constructor(options: IOptions) {
-    this.hasTracker = !!options.analyticsTracker
+  constructor(options: any) {
     this.options = Object.assign({}, DEFAULT_OPTIONS, options)
   }
 
@@ -66,11 +62,17 @@ class PerfumeWebpackPlugin {
   private handle(compilation: any): void {
     const options = this.options
     const { keywords } = options
-    const mainText = loadFile('./perfume-main.js')
-    const workerText = loadFile('./perfume-worker.js')
+    const mainText = loadFile('../assets/perfume-main.js')
+    const workerText = loadFile('../assets/perfume-worker.js')
     const mainOptions = pick(options, [
       'reportUrl',
       'ignoreResource',
+      'dataConsumption',
+      'resourceTiming',
+      'analyticsTracker',
+      'logPrefix',
+      'logging',
+      'maxMeasureTime',
     ])
     const workerOptions = pick(options, [
       'dataConsumption',
@@ -80,8 +82,9 @@ class PerfumeWebpackPlugin {
       'logging',
       'maxMeasureTime',
     ])
-    const mainOptionsText = `var options = ${JSON.stringify(mainOptions)}`
-    const workerOptionsText = `var options = ${JSON.stringify(workerOptions)}`
+
+    const mainOptionsText = optionsFactory(mainOptions)
+    const workerOptionsText = optionsFactory(workerOptions)
 
     const workerCode = PerfumeWebpackPlugin.mergeCode(workerText, workerOptionsText, keywords)
     const mainCode = PerfumeWebpackPlugin.mergeCode(mainText, mainOptionsText, keywords)

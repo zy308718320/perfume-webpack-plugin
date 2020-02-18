@@ -7,12 +7,11 @@
   "scripts": {
     "test": "jest --coverage --no-cache",
     "coveralls": "cat ./coverage/lcov.info | coveralls",
-    "build": "tsc",
-    "build:dev": "tsc -w",
+    "build": "webpack && tsc",
+    "build:dev": "webpack -w && tsc -w",
     "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
     "lint": "tslint -p tsconfig.json",
     "prebuild": "rimraf dist",
-    "prepare": "npm run build",
     "prepublishOnly": "npm run test && npm run lint",
     "preversion": "npm run lint",
     "version": "npm run format && git add -A src",
@@ -47,16 +46,19 @@
   "devDependencies": {
     "@types/escodegen": "0.0.6",
     "@types/estree": "0.0.42",
-    "@types/lodash": "^4.14.149",
     "@types/jest": "^25.1.1",
+    "@types/lodash": "^4.14.149",
     "@types/webpack": "^4.41.5",
     "coveralls": "^3.0.9",
     "jest": "^25.1.0",
     "prettier": "^1.19.1",
     "rimraf": "^3.0.1",
     "ts-jest": "^25.2.0",
+    "ts-loader": "^6.2.1",
     "tslint": "^6.0.0",
     "tslint-config-prettier": "^1.18.0",
-    "typescript": "^3.7.5"
+    "typescript": "^3.7.5",
+    "webpack-cli": "^4.0.0-beta.2",
+    "worker-loader": "^2.0.0"
   }
 }

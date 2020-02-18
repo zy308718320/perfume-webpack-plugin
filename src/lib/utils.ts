@@ -1,12 +1,15 @@
-import * as fs from 'fs'
-import * as path from 'path'
+export function transformParamToUrl(param: any) {
+  const tempObj = []
 
-export function resolve(dir: string) {
-  return path.join(__dirname, dir)
+  for (const i in param) {
+    if (param.hasOwnProperty(i) && param[i]) {
+      tempObj.push(i)
+      tempObj.push('=')
+      tempObj.push(param[i])
+      tempObj.push('&')
+    }
+  }
+
+  tempObj.pop()
+  return tempObj.join('')
 }
-
-export function loadFile(file: string) {
-  return fs.readFileSync(resolve(file), {encoding: 'utf8'})
-}
-
-
