@@ -7,6 +7,8 @@
 
 A Webpack plugin to [perfume.js](https://github.com/Zizzamia/perfume.js)
 
+English | [简体中文](./README-zh_CN.md)
+
 ## Installation:
 
 First things first, install the module:
@@ -34,7 +36,7 @@ module.exports = {
       dataConsumption: true,
       resourceTiming: true,
       reportUrl: `https://example.com/report?apiKey=${apiKey}`,
-      ignoreResource: ['/report'],
+      ignoreResource: [{ key: 'name', value: '/report' }],
     })
   ]
 }
