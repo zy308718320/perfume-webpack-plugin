@@ -2,20 +2,19 @@ const path = require('path');
 
 module.exports = {
   entry: {
-    'perfume-main': './src/assets/perfume-main.ts',
-    'perfume-worker': './src/assets/perfume-worker.ts',
-    // 'perfume-analytics': './src/assets/perfume-analytics.ts',
+    'perfume-main': './src/assets/perfume-main.js',
+    'perfume-worker': './src/assets/perfume-worker.js',
   },
   mode: 'development',
   devtool: 'hidden-source-map',
   module: {
     rules: [
       {
-        test: /\.tsx?$/,
+        test: /\.m?js$/,
         use: [{
-          loader: 'ts-loader',
+          loader: 'babel-loader',
           options: {
-            transpileOnly: true,
+            presets: ['@babel/preset-env']
           }
         }],
         exclude: /node_modules/
@@ -23,7 +22,7 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: [ '.tsx', '.ts', '.js' ]
+    extensions: [ '.jsx', '.js' ]
   },
   output: {
     filename: '[name].js',

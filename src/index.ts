@@ -6,23 +6,31 @@ import * as walk from 'acorn-walk'
 import * as escodegen from 'escodegen'
 import { pick } from 'lodash'
 import optionsFactory from './factory/options'
+import { mainOptionItems, workerOptionItems } from './config'
 
 interface IOptions extends IPerfumeOptions{
   entry: any
+  fps: boolean,
+  tag: string
   keywords: string
   reportUrl: string
   ignoreResource: object
+  isMerge: boolean
 }
 
 const DEFAULT_OPTIONS = {
   entry: /app\.js$/,
-  keywords: 'options',
+  keywords: 'options', // 普通用户无需关心
   // Metrics
+  fps: false,
   dataConsumption: false,
   resourceTiming: false,
+  cumulativeLayoutShift: false,
   // Analytics
+  tag: '',
   reportUrl: '',
   ignoreResource: [],
+  isMerge: false,
   analyticsTracker: null,
   // Logging
   logPrefix: 'Perfume.js:',
@@ -64,25 +72,8 @@ class PerfumeWebpackPlugin {
     const { keywords } = options
     const mainText = loadFile('../assets/perfume-main.js')
     const workerText = loadFile('../assets/perfume-worker.js')
-    const mainOptions = pick(options, [
-      'reportUrl',
-      'ignoreResource',
-      'dataConsumption',
-      'resourceTiming',
-      'analyticsTracker',
-      'logPrefix',
-      'logging',
-      'maxMeasureTime',
-    ])
-    const workerOptions = pick(options, [
-      'dataConsumption',
-      'resourceTiming',
-      'analyticsTracker',
-      'logPrefix',
-      'logging',
-      'maxMeasureTime',
-    ])
-
+    const mainOptions = pick(options, mainOptionItems)
+    const workerOptions = pick(options, workerOptionItems)
     const mainOptionsText = optionsFactory(mainOptions)
     const workerOptionsText = optionsFactory(workerOptions)
 

@@ -1,6 +1,6 @@
 const options = {}
 
-function track(type: string, data: object) {
+function track(type, data) {
   console.log(type, data)
 }
 

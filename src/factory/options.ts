@@ -24,6 +24,9 @@ export default function optionsFactory(options: any) {
           case 'resourceTiming':
             track(metricName, data)
             break
+          case 'cumulativeLayoutShift':
+            track(metricName, data)
+            break
           case 'firstPaint':
           case 'firstContentfulPaint':
           case 'firstInputDelay':
