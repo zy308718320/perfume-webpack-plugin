@@ -3,6 +3,7 @@ export const mainOptionItems = [
   'reportUrl',
   'ignoreResource',
   'isMerge',
+  'digit',
   'fps',
   'dataConsumption',
   'resourceTiming',

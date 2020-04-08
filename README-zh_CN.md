@@ -33,10 +33,14 @@ module.exports = {
   plugins: [
     new PerfumeWebpackPlugin({
       entry: /app\.js$/,
+      fps: true,
       dataConsumption: true,
       resourceTiming: true,
+      cumulativeLayoutShift: true,
+      isMerge: true,
       reportUrl: `https://example.com/report?apiKey=${apiKey}`,
       ignoreResource: [{ key: 'name', value: '/report' }],
+      logging: false,
     })
   ]
 }
@@ -47,11 +51,15 @@ module.exports = {
 const options = {
   entry: /app\.js$/,
   // Metrics
+  fps: false,
   dataConsumption: false,
   resourceTiming: false,
+  cumulativeLayoutShift: false,
   // Analytics
+  tag: '',
   reportUrl: '',
   ignoreResource: [],
+  isMerge: false,
   analyticsTracker: option => {},
   // Logging
   logPrefix: 'Perfume.js:',

@@ -15,7 +15,7 @@ export function transformParamToUrl(param) {
 }
 
 export function sendBeacon (url, data, callback) {
-  const contentType = 'application/x-www-form-urlencoded;charset=UTF-8'
+  const contentType = 'text/plain;charset=UTF-8'
   if (navigator.sendBeacon) {
     const blob = new Blob([JSON.stringify(data)], {type : contentType})
     navigator.sendBeacon(url, blob)

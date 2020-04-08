@@ -16,6 +16,7 @@ interface IOptions extends IPerfumeOptions{
   reportUrl: string
   ignoreResource: object
   isMerge: boolean
+  digit: number
 }
 
 const DEFAULT_OPTIONS = {
@@ -31,6 +32,7 @@ const DEFAULT_OPTIONS = {
   reportUrl: '',
   ignoreResource: [],
   isMerge: false,
+  digit: -1,
   analyticsTracker: null,
   // Logging
   logPrefix: 'Perfume.js:',
