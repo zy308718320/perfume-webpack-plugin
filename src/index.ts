@@ -53,12 +53,12 @@ class PerfumeWebpackPlugin {
    */
   public apply(compiler: Compiler): void {
     if (compiler.hooks) {
-      compiler.hooks.emit.tap('PerfumeWebpackPlugin', (compilation) => {
+      compiler.hooks.afterCompile.tap('PerfumeWebpackPlugin', (compilation) => {
         this.handle(compilation)
         return Promise.resolve()
       })
     } else {
-      compiler.plugin('emit', (compilation, cb) => {
+      compiler.plugin('after-compile', (compilation, cb) => {
         this.handle(compilation)
         return cb()
       })
@@ -112,7 +112,6 @@ class PerfumeWebpackPlugin {
     const options = this.options
     const entry = Array.isArray(options.entry) ? options.entry : [options.entry]
     const assets = compilation.assets
-
     Object.keys(assets).forEach((asset) => {
       if (entry.length) {
         const isMatched = entry.some(en => en.test(asset))
@@ -120,7 +119,7 @@ class PerfumeWebpackPlugin {
       }
       if (!/\.js$/.test(asset)) return
       let originSource = assets[asset].source()
-      originSource += source
+      originSource += `\n${source}`
       compilation.assets[asset].source = () => originSource
       compilation.assets[asset].size = () => originSource.length
     })

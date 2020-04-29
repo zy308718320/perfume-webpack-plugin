@@ -1,6 +1,6 @@
 {
   "name": "perfume-webpack-plugin",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A Webpack plugin to perfume.js",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
